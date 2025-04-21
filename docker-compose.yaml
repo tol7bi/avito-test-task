@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: pvz_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pvz_db
+      TZ: Asia/Almaty
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  app:
+    build: .
+    container_name: pvz_backend
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+      - "9000:9000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: on-failure
+
+
+volumes:
+  db_data:
+  
