@@ -64,7 +64,7 @@ POST /login
 
 ## 📂 Структура проекта
 
-.
+```bash
 ├── cmd/                 # main.go
 ├── internal/
 │   ├── app/             # маршруты
@@ -78,8 +78,7 @@ POST /login
 ├── Dockerfile
 ├── docker-compose.yml
 └── README.md
-
-
+``` 
 ## 🛰 gRPC
 
 Endpoint: pvz.v1.PVZService/GetPVZList
